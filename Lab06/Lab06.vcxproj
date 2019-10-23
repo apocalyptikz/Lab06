@@ -123,6 +123,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="labcalc.cpp" />
+    <ClCompile Include="processline.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mystack.h" />
+    <ClInclude Include="node_ll.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

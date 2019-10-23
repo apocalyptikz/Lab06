@@ -49,12 +49,13 @@
 
 namespace DS
 {
+	template <typename VT>
     class mystack
     {
     public:
         // TYPEDEFS
         typedef std::size_t size_type;
-        typedef int value_type;
+        typedef VT value_type;
         typedef DSLL::node<value_type> node_type;
         // CONSTRUCTORS and DESTRUCTOR
         mystack( ){ pTop = nullptr;  node_count = 0;  }
@@ -72,6 +73,95 @@ namespace DS
         size_t node_count;
         node_type *pTop;  // Points to top of stack
     };
+
+	template<typename VT>
+	mystack<VT>::mystack(const mystack& source)
+	{
+		if (source.pTop == nullptr) {
+			//Source list is empty, initialize member data
+			pTop = nullptr;
+		}
+		else {
+			node_type* tail;
+			//Special case, add a new head node
+			pTop = tail = new node_type(source.pTop->getData());
+			//Loop until no more nodes to add
+			for (node_type* p = source.pTop->getNext(); p != nullptr; p = p->getNext()) {
+				tail->setNext(new node_type(source.pTop->getData()));
+				tail = tail->getNext();
+			}
+		}
+		node_count = source.node_count;
+	}
+
+	template<typename VT>
+	mystack<VT>::~mystack()
+	{
+		node_type* temp;
+		while (pTop != nullptr) {
+			temp = pTop;
+			pTop = pTop->getNext();
+			delete temp;
+		}
+	}
+
+	template<typename VT>
+	void mystack<VT>::push(const value_type& entry)
+	{
+		pTop = new node_type(entry, pTop);
+		++node_count;
+	}
+
+	template<typename VT>
+	void mystack<VT>::pop()
+		// Library facilities used: cassert
+	{
+		assert(!empty());
+		DSLL::node<value_type>* temp;
+		temp = pTop;
+		pTop = pTop->getNext();
+		delete temp;
+		--node_count;
+	}
+
+	template<typename VT>
+	void mystack<VT>::operator =(const mystack& source)
+	{
+		if (this == &source) // Handle self-assignment
+			return;
+
+		//Delete old
+		node_type* temp;
+		while (pTop != nullptr) {
+			temp = pTop;
+			pTop = pTop->getNext();
+			delete temp;
+		}
+
+		if (source.pTop == nullptr) {
+			//Source list is empty, initialize member data
+			pTop = nullptr;
+		}
+		else {
+			node_type* tail;
+			//Special case, add a new head node
+			pTop = tail = new node_type(source.pTop->getData());
+			//Loop until no more nodes to add
+			for (node_type* p = source.pTop->getNext(); p != nullptr; p = p->getNext()) {
+				tail->setNext(new node_type(source.pTop->getData()));
+				tail = tail->getNext();
+			}
+		}
+		node_count = source.node_count;
+
+	}
+
+	template<typename VT>
+	typename mystack<VT>::value_type mystack<VT>::top() const
+	{
+		assert(!empty());
+		return pTop->getData();
+	}
 }
 
 #endif
