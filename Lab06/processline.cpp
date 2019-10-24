@@ -7,13 +7,11 @@
 //============================================================================
 
 #include <cctype>     // Provides isdigit
-#include <cmath>	  // NaN
 #include <cstdlib>    // Provides EXIT_SUCCESS
 #include <cstring>    // Provides strchr
 #include <iostream>   // Provides cout, cin, peek, ignore
 #include "mystack.h"
 
-namespace DS {
 
 	/*
 Reads the next line of input (including the newline character at the end of the line). It treats this input line as an arithmetic expression.
@@ -33,25 +31,24 @@ Here are a few considerations:
 	{
 		double number;
 		const char DECIMAL = '.';
-		mystack<double> mathStack;
+		DS::mystack<double> mathStack;
 		while (ins && ins.peek() != '\n')
 		{
-			if (isdigit(ins.peek()) || ins.peek == DECIMAL)
+			if (isdigit(ins.peek()) || ins.peek() == DECIMAL)
 			{
 				ins >> number;
 				mathStack.push(number);
 			}
 			else if (strchr("-*+/", ins.peek()) != NULL)
 			{
+				char operation;
+				ins >> operation;
 				//get numbers top
 				double num1 = mathStack.top();
 				mathStack.pop();
-				//pop
-				//get numbers top
-				//pop
 				double num2 = mathStack.top();
 				mathStack.pop();
-				switch (ins.peek())
+				switch (operation)
 				{
 				case '-':
 					mathStack.push(num1 - num2);
@@ -61,7 +58,7 @@ Here are a few considerations:
 					break;
 				case '/':
 					if (num2 == 0)
-						return NAN;
+						return std::nan("Invalid");
 					mathStack.push(num1 / num2);
 					break;
 				case '*':
@@ -78,4 +75,3 @@ Here are a few considerations:
 
 
 
-}

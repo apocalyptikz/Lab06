@@ -44,6 +44,7 @@
 
 #ifndef MYSTACK_H
 #define MYSTACK_H
+#include <cassert>
 #include <cstdlib>   // Provides size_t
 #include "node_ll.h"
 
