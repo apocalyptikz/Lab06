@@ -8,6 +8,7 @@
 
 #include <cctype>     // Provides isdigit
 #include <cstdlib>    // Provides EXIT_SUCCESS
+#include <cmath>	  // NaN?
 #include <cstring>    // Provides strchr
 #include <iostream>   // Provides cout, cin, peek, ignore
 #include "mystack.h"
