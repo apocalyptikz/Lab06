@@ -2,6 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/
-/Lab06/.vs/
-/Lab06/Debug/
+/.vs/*
+/Lab06/.vs/*
+/Lab06/Debug/*
