@@ -44,10 +44,11 @@ Here are a few considerations:
 				char operation;
 				ins >> operation;
 				//get numbers top
-				double num1 = mathStack.top();
-				mathStack.pop();
 				double num2 = mathStack.top();
 				mathStack.pop();
+				double num1 = mathStack.top();
+				mathStack.pop();
+				
 				switch (operation)
 				{
 				case '-':
@@ -58,6 +59,7 @@ Here are a few considerations:
 					break;
 				case '/':
 					if (num2 == 0)
+						ins.ignore();
 						return std::nan("Invalid");
 					mathStack.push(num1 / num2);
 					break;
@@ -65,11 +67,11 @@ Here are a few considerations:
 					mathStack.push(num1 * num2);
 					break;
 				}
-
 			}
 			else
 				ins.ignore();
 		}
+		ins.ignore();
 		return mathStack.top();
 	}
 
