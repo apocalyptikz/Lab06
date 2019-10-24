@@ -59,8 +59,11 @@ Here are a few considerations:
 					break;
 				case '/':
 					if (num2 == 0)
+					{
 						ins.ignore();
 						return std::nan("Invalid");
+					}
+						
 					mathStack.push(num1 / num2);
 					break;
 				case '*':
