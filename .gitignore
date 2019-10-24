@@ -2,4 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Lab06/.vs/Lab06/v16/Browse.VC.opendb
+/.vs
+/Lab06/.vs
+/Lab06/Debug
